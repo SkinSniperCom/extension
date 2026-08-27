@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SkinSniper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <a class="brand" id="brand-link" target="_blank" rel="noopener">
+      <img src="logo.svg" alt="SkinSniper" width="121" height="20">
+    </a>
+    <div class="head-right">
+      <a id="open-site" target="_blank" rel="noopener">skinsniper.com ↗</a>
+      <button id="gear" type="button" data-i18n-title="popup_settings" title="Settings" aria-label="Settings" aria-pressed="false"></button>
+    </div>
+  </header>
+  <div id="access"></div>
+  <div id="search-view">
+    <input id="q" type="search" data-i18n-placeholder="popup_search_placeholder" placeholder="Search skins and items..." autocomplete="off" autofocus>
+    <div id="current"></div>
+    <div id="results"></div>
+  </div>
+  <div id="settings-view" hidden>
+    <div class="set-row">
+      <span data-i18n="popup_panel_position">Panel position on Steam pages</span>
+      <div id="pos-grid">
+        <button type="button" data-pos="tl" data-i18n-title="popup_pos_tl" title="Top left"></button>
+        <button type="button" data-pos="tr" data-i18n-title="popup_pos_tr" title="Top right"></button>
+        <button type="button" data-pos="bl" data-i18n-title="popup_pos_bl" title="Bottom left"></button>
+        <button type="button" data-pos="br" data-i18n-title="popup_pos_br" title="Bottom right"></button>
+      </div>
+    </div>
+    <div class="set-row">
+      <span data-i18n="popup_lang_currency">Language and currency</span>
+      <span class="set-value">
+        <b id="prefs-value">EN · USD</b>
+        <a data-path="/settings" target="_blank" rel="noopener"><span data-i18n="popup_change">Change</span> ↗</a>
+      </span>
+    </div>
+    <p class="hint" data-i18n="popup_prefs_hint">Both follow what you picked on skinsniper.com.</p>
+  </div>
+  <footer>
+    <a data-path="/tools/inventory-value-calculator" data-i18n="popup_link_inventory_value" target="_blank" rel="noopener">Inventory value</a>
+    <a data-path="/tools/trade-up-calculator" data-i18n="popup_link_trade_up" target="_blank" rel="noopener">Trade-up</a>
+    <a data-path="/tools/price-comparison" data-i18n="popup_link_price_comparison" target="_blank" rel="noopener">Price comparison</a>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

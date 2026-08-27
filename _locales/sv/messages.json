@@ -1,0 +1,161 @@
+{
+  "ext_name": {
+    "message": "SkinSniper - priskoll för CS2-skins på Steam"
+  },
+  "ext_description": {
+    "message": "Priskoll för CS2-skins på Steam Market och i inventarier: marknadspriser i en liten panel. Inga Steam-anrop, inget onödigt."
+  },
+  "popup_settings": {
+    "message": "Inställningar"
+  },
+  "popup_back_to_search": {
+    "message": "Tillbaka till sökningen"
+  },
+  "popup_search_placeholder": {
+    "message": "Sök skins och föremål..."
+  },
+  "popup_panel_position": {
+    "message": "Panelens placering på Steam-sidor"
+  },
+  "popup_pos_tl": {
+    "message": "Uppe till vänster"
+  },
+  "popup_pos_tr": {
+    "message": "Uppe till höger"
+  },
+  "popup_pos_bl": {
+    "message": "Nere till vänster"
+  },
+  "popup_pos_br": {
+    "message": "Nere till höger"
+  },
+  "popup_lang_currency": {
+    "message": "Språk och valuta"
+  },
+  "popup_change": {
+    "message": "Ändra"
+  },
+  "popup_prefs_hint": {
+    "message": "Båda följer det du valt på skinsniper.com."
+  },
+  "popup_link_inventory_value": {
+    "message": "Inventarievärde"
+  },
+  "popup_link_trade_up": {
+    "message": "Trade-Up"
+  },
+  "popup_link_price_comparison": {
+    "message": "Prisjämförelse"
+  },
+  "popup_no_access": {
+    "message": "SkinSniper kan inte läsa Steam-sidor eller nå sin egen sajt, så inga priser laddas."
+  },
+  "access_turn_on": {
+    "message": "Slå på åtkomst"
+  },
+  "popup_access_granted": {
+    "message": "Åtkomsten är på. Ladda om Steam-sidan för att se panelen."
+  },
+  "popup_access_still_off": {
+    "message": "Åtkomsten är fortfarande av."
+  },
+  "popup_access_no_prompt": {
+    "message": "Det går inte att be om åtkomst här."
+  },
+  "popup_manual_hint": {
+    "message": "Öppna tilläggsknappen i verktygsfältet, välj SkinSniper och tillåt sajterna där."
+  },
+  "popup_on_this_page": {
+    "message": "På den här sidan"
+  },
+  "popup_more_results": {
+    "message": "Fler resultat ($COUNT$) →",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "128"
+      }
+    }
+  },
+  "section_skins": {
+    "message": "Skins"
+  },
+  "section_items": {
+    "message": "Föremål"
+  },
+  "section_collections": {
+    "message": "Samlingar"
+  },
+  "section_weapons": {
+    "message": "Vapen"
+  },
+  "section_families": {
+    "message": "Skinfamiljer"
+  },
+  "section_phases": {
+    "message": "Faser"
+  },
+  "section_updates": {
+    "message": "Uppdateringar"
+  },
+  "section_blog": {
+    "message": "Blogg"
+  },
+  "panel_cheapest_condition": {
+    "message": "Billigaste skicket"
+  },
+  "panel_not_in_catalog": {
+    "message": "Finns inte i SkinSnipers katalog än"
+  },
+  "panel_search_on_skinsniper": {
+    "message": "Sök på SkinSniper"
+  },
+  "panel_no_site_access": {
+    "message": "SkinSniper har ingen åtkomst till sin egen sajt"
+  },
+  "panel_api_error": {
+    "message": "Kunde inte nå SkinSniper"
+  },
+  "panel_try_again": {
+    "message": "Försök igen"
+  },
+  "panel_cheaper_than_steam": {
+    "message": "$PCT$ % billigare än Steam",
+    "placeholders": {
+      "pct": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  },
+  "panel_no_prices": {
+    "message": "Inga marknadspriser än"
+  },
+  "panel_more_markets_one": {
+    "message": "1 marknad till"
+  },
+  "panel_more_markets": {
+    "message": "$COUNT$ marknader till",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "panel_mini_title": {
+    "message": "SkinSniper-priser"
+  },
+  "panel_collapse": {
+    "message": "Fäll ihop"
+  },
+  "panel_settings_title": {
+    "message": "SkinSniper-inställningar"
+  },
+  "panel_check_skin": {
+    "message": "Visa skin-detaljer"
+  },
+  "panel_check_item": {
+    "message": "Visa föremålsdetaljer"
+  }
+}

@@ -1,0 +1,396 @@
+/* skinsniper.com palette: green #3FA367, bgs #202228/#27292F/#2E3138,
+   borders #383C46/#40444E, text #F5F6F7 (+B8/70 muted/faint). */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Compact by default, grows with results up to the cap, then the list scrolls. */
+body {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  max-height: 560px;
+  overflow: hidden;
+  background: #202228;
+  color: #F5F6F7B8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+/* Opened as a regular tab (the fallback when action.openPopup is unavailable):
+   the toolbar popup is never this wide, so this frames and centers the card
+   instead of gluing a naked 340px column to the tab's top-left corner. */
+@media (min-width: 500px) {
+  html {
+    display: grid;
+    min-height: 100%;
+    background: #17181D;
+  }
+
+  body {
+    margin: auto;
+    max-height: min(560px, calc(100vh - 48px));
+    border: 1px solid #40444E;
+    border-radius: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid #383C46;
+}
+
+.brand {
+  display: block;
+  flex: none;
+}
+
+.brand img {
+  display: block;
+}
+
+header a {
+  color: #3FA367;
+  text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+.head-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#gear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  color: #F5F6F770;
+  cursor: pointer;
+}
+
+#gear svg {
+  width: 14px;
+  height: 14px;
+}
+
+#gear:hover {
+  background: #2E3138;
+  color: #F5F6F7;
+}
+
+#gear[aria-pressed="true"] {
+  color: #3FA367;
+}
+
+/* Missing site access: an amber card above the search box, since with access
+   off every list below it stays empty anyway. */
+#access {
+  flex: none;
+}
+
+#access .access {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 10px 12px 0;
+  padding: 9px 10px;
+  background: #2E2A22;
+  border: 1px solid #6B5427;
+  border-radius: 3px;
+  color: #F5F6F7B8;
+  line-height: 1.4;
+}
+
+#access button {
+  padding: 5px 10px;
+  background: #3FA367;
+  border: 0;
+  border-radius: 3px;
+  color: #F5F6F7;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#access button:hover {
+  background: #48B473;
+}
+
+#q {
+  flex: none;
+  width: calc(100% - 24px);
+  margin: 10px 12px;
+  padding: 7px 10px;
+  background: #27292F;
+  border: 1px solid #40444E;
+  border-radius: 3px;
+  color: #F5F6F7;
+  font-size: 13px;
+  outline: none;
+}
+
+#q:focus {
+  border-color: #3FA367;
+}
+
+#current {
+  flex: none;
+}
+
+#current .current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  padding: 7px 12px;
+  background: #27292F;
+  border-top: 1px solid #383C46;
+  border-bottom: 1px solid #383C46;
+  color: #F5F6F7B8;
+  text-decoration: none;
+}
+
+#current .current:hover {
+  background: #2E3138;
+}
+
+#current img {
+  flex: none;
+  width: 44px;
+  height: 33px;
+  object-fit: contain;
+  background: #2E3138;
+  border-radius: 2px;
+}
+
+#current .cur-text {
+  flex: 1;
+  min-width: 0;
+}
+
+#current .cur-name {
+  display: block;
+  overflow: hidden;
+  color: #F5F6F7;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#current .cur-sub {
+  display: block;
+  color: #F5F6F770;
+  font-size: 11px;
+}
+
+#current b {
+  color: #F5F6F7;
+}
+
+#results {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #40444E transparent;
+}
+
+#results::-webkit-scrollbar {
+  width: 8px;
+}
+
+#results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#results::-webkit-scrollbar-thumb {
+  background: #40444E;
+  border-radius: 4px;
+}
+
+#results::-webkit-scrollbar-thumb:hover {
+  background: #4C515C;
+}
+
+#results .section {
+  padding: 8px 12px 4px;
+  color: #F5F6F770;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#results .result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  color: #F5F6F7B8;
+  text-decoration: none;
+}
+
+#results .result:hover {
+  background: #2E3138;
+  color: #F5F6F7;
+}
+
+#results .result img {
+  flex: none;
+  width: 36px;
+  height: 27px;
+  object-fit: contain;
+  background: #2E3138;
+  border-radius: 2px;
+}
+
+#results .result span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#results .result b {
+  color: #F5F6F7;
+}
+
+#results .more {
+  display: block;
+  padding: 5px 12px 8px;
+  color: #3FA367;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+#results .more:hover {
+  text-decoration: underline;
+}
+
+/* The two views the header gear switches between. [hidden] needs saying out
+   loud: the display below would otherwise win over the UA rule. */
+#search-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#settings-view {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+#search-view[hidden],
+#settings-view[hidden] {
+  display: none;
+}
+
+#settings-view .set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#settings-view .set-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#settings-view b {
+  color: #F5F6F7;
+  font-weight: normal;
+}
+
+#settings-view a {
+  color: #3FA367;
+  text-decoration: none;
+}
+
+#settings-view a:hover {
+  text-decoration: underline;
+}
+
+#settings-view .hint {
+  color: #F5F6F770;
+  font-size: 11px;
+}
+
+/* 2x2 corner picker: each button is a tiny screen with a dot in its corner. */
+#pos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 26px);
+  gap: 4px;
+}
+
+#pos-grid button {
+  position: relative;
+  height: 18px;
+  background: #27292F;
+  border: 1px solid #40444E;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#pos-grid button::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: #F5F6F770;
+}
+
+#pos-grid button[data-pos="tl"]::after { top: 3px; left: 3px; }
+#pos-grid button[data-pos="tr"]::after { top: 3px; right: 3px; }
+#pos-grid button[data-pos="bl"]::after { bottom: 3px; left: 3px; }
+#pos-grid button[data-pos="br"]::after { bottom: 3px; right: 3px; }
+
+#pos-grid button:hover {
+  border-color: #3FA367;
+}
+
+#pos-grid button.active {
+  border-color: #3FA367;
+}
+
+#pos-grid button.active::after {
+  background: #3FA367;
+}
+
+footer {
+  flex: none;
+  display: flex;
+  gap: 12px;
+  padding: 10px 12px;
+  border-top: 1px solid #383C46;
+}
+
+footer a {
+  color: #3FA367;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

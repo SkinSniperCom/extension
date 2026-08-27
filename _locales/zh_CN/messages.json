@@ -1,0 +1,161 @@
+{
+  "ext_name": {
+    "message": "SkinSniper - Steam CS2 饰品比价助手"
+  },
+  "ext_description": {
+    "message": "在 Steam 社区市场和库存中查 CS2 饰品价格：小面板对比各市场报价。不向 Steam 发送请求，界面不臃肿。"
+  },
+  "popup_settings": {
+    "message": "设置"
+  },
+  "popup_back_to_search": {
+    "message": "返回搜索"
+  },
+  "popup_search_placeholder": {
+    "message": "搜索皮肤和其他饰品…"
+  },
+  "popup_panel_position": {
+    "message": "面板在 Steam 页面上的位置"
+  },
+  "popup_pos_tl": {
+    "message": "左上角"
+  },
+  "popup_pos_tr": {
+    "message": "右上角"
+  },
+  "popup_pos_bl": {
+    "message": "左下角"
+  },
+  "popup_pos_br": {
+    "message": "右下角"
+  },
+  "popup_lang_currency": {
+    "message": "语言和货币"
+  },
+  "popup_change": {
+    "message": "更改"
+  },
+  "popup_prefs_hint": {
+    "message": "两项都跟随你在 skinsniper.com 上的选择。"
+  },
+  "popup_link_inventory_value": {
+    "message": "库存价值"
+  },
+  "popup_link_trade_up": {
+    "message": "汰换合同"
+  },
+  "popup_link_price_comparison": {
+    "message": "市场比价"
+  },
+  "popup_no_access": {
+    "message": "SkinSniper 无法读取 Steam 页面，也无法访问自己的站点，因此不会加载价格。"
+  },
+  "access_turn_on": {
+    "message": "开启访问权限"
+  },
+  "popup_access_granted": {
+    "message": "访问权限已开启。重新加载 Steam 页面即可看到面板。"
+  },
+  "popup_access_still_off": {
+    "message": "访问权限仍未开启。"
+  },
+  "popup_access_no_prompt": {
+    "message": "无法在此处请求访问权限。"
+  },
+  "popup_manual_hint": {
+    "message": "点击工具栏中的扩展按钮，选择 SkinSniper，在那里允许访问这些网站。"
+  },
+  "popup_on_this_page": {
+    "message": "当前页面"
+  },
+  "popup_more_results": {
+    "message": "更多结果（$COUNT$）→",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "128"
+      }
+    }
+  },
+  "section_skins": {
+    "message": "皮肤"
+  },
+  "section_items": {
+    "message": "物品"
+  },
+  "section_collections": {
+    "message": "收藏品系列"
+  },
+  "section_weapons": {
+    "message": "武器"
+  },
+  "section_families": {
+    "message": "皮肤系列"
+  },
+  "section_phases": {
+    "message": "相位"
+  },
+  "section_updates": {
+    "message": "更新"
+  },
+  "section_blog": {
+    "message": "博客"
+  },
+  "panel_cheapest_condition": {
+    "message": "最便宜的磨损"
+  },
+  "panel_not_in_catalog": {
+    "message": "SkinSniper 目录中暂无此物品"
+  },
+  "panel_search_on_skinsniper": {
+    "message": "在 SkinSniper 上搜索"
+  },
+  "panel_no_site_access": {
+    "message": "SkinSniper 无法访问自己的站点"
+  },
+  "panel_api_error": {
+    "message": "无法连接 SkinSniper"
+  },
+  "panel_try_again": {
+    "message": "重试"
+  },
+  "panel_cheaper_than_steam": {
+    "message": "比 Steam 便宜 $PCT$%",
+    "placeholders": {
+      "pct": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  },
+  "panel_no_prices": {
+    "message": "暂无市场价格"
+  },
+  "panel_more_markets_one": {
+    "message": "还有 1 个市场"
+  },
+  "panel_more_markets": {
+    "message": "还有 $COUNT$ 个市场",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "panel_mini_title": {
+    "message": "SkinSniper 价格"
+  },
+  "panel_collapse": {
+    "message": "收起"
+  },
+  "panel_settings_title": {
+    "message": "SkinSniper 设置"
+  },
+  "panel_check_skin": {
+    "message": "查看皮肤详情"
+  },
+  "panel_check_item": {
+    "message": "查看饰品详情"
+  }
+}

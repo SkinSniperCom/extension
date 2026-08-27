@@ -1,0 +1,208 @@
+{
+  "ext_name": {
+    "message": "SkinSniper - CS2 Skin Price Checker for Steam",
+    "description": "Extension name shown in the store and browser UI. Chrome Web Store hard limit: 45 characters. If no natural translation fits, keep the English name."
+  },
+  "ext_description": {
+    "message": "CS2 skin price checker on Steam Market and inventories: marketplace prices in a small panel. No Steam requests, no interface bloat.",
+    "description": "Manifest description, doubles as the store summary. Chrome Web Store hard limit: 132 characters."
+  },
+  "popup_settings": {
+    "message": "Settings",
+    "description": "Tooltip of the gear button in the popup header."
+  },
+  "popup_back_to_search": {
+    "message": "Back to search",
+    "description": "Gear button tooltip while the settings card is open."
+  },
+  "popup_search_placeholder": {
+    "message": "Search skins and items...",
+    "description": "Placeholder of the popup search box. Items are non-skin CS2 items (cases, stickers, charms...)."
+  },
+  "popup_panel_position": {
+    "message": "Panel position on Steam pages",
+    "description": "Settings row label for the screen-corner picker of the floating price panel."
+  },
+  "popup_pos_tl": {
+    "message": "Top left",
+    "description": "Corner picker button tooltip."
+  },
+  "popup_pos_tr": {
+    "message": "Top right",
+    "description": "Corner picker button tooltip."
+  },
+  "popup_pos_bl": {
+    "message": "Bottom left",
+    "description": "Corner picker button tooltip."
+  },
+  "popup_pos_br": {
+    "message": "Bottom right",
+    "description": "Corner picker button tooltip."
+  },
+  "popup_lang_currency": {
+    "message": "Language and currency",
+    "description": "Settings row label; the value next to it shows e.g. 'EN · USD'."
+  },
+  "popup_change": {
+    "message": "Change",
+    "description": "Link next to the language/currency value; opens the settings page on skinsniper.com."
+  },
+  "popup_prefs_hint": {
+    "message": "Both follow what you picked on skinsniper.com.",
+    "description": "Hint under the settings rows: the panel's language and currency come from the user's choice on the website."
+  },
+  "popup_link_inventory_value": {
+    "message": "Inventory value",
+    "description": "Popup footer link to the inventory value calculator tool."
+  },
+  "popup_link_trade_up": {
+    "message": "Trade-up",
+    "description": "Popup footer link to the trade-up calculator. Trade-up is the CS2 trade up contract; use the term the local CS2 community uses."
+  },
+  "popup_link_price_comparison": {
+    "message": "Price comparison",
+    "description": "Popup footer link to the marketplace price comparison tool."
+  },
+  "popup_no_access": {
+    "message": "SkinSniper cannot read Steam pages or reach its own site, so no prices load.",
+    "description": "Banner shown when the browser has the extension's site access switched off (mainly Firefox)."
+  },
+  "access_turn_on": {
+    "message": "Turn access on",
+    "description": "Button asking the browser to grant site access back. Used in the popup banner and in the Steam page panel."
+  },
+  "popup_access_granted": {
+    "message": "Access is on. Reload the Steam page to see the panel.",
+    "description": "Shown after the user grants access."
+  },
+  "popup_access_still_off": {
+    "message": "Access is still off.",
+    "description": "Shown when the permission prompt was declined. popup_manual_hint is appended after it."
+  },
+  "popup_access_no_prompt": {
+    "message": "Access cannot be asked for here.",
+    "description": "Shown when the browser refuses to show a permission prompt. popup_manual_hint is appended after it."
+  },
+  "popup_manual_hint": {
+    "message": "Open the extensions button in the toolbar, pick SkinSniper and allow the sites there.",
+    "description": "How to grant site access manually via the browser's extensions toolbar menu."
+  },
+  "popup_on_this_page": {
+    "message": "On this page",
+    "description": "Label under the item that the current Steam tab is showing."
+  },
+  "popup_more_results": {
+    "message": "More results ($COUNT$) →",
+    "description": "Link under a search section; opens the full result list on the site. $COUNT$ is the total number of results.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "128"
+      }
+    }
+  },
+  "section_skins": {
+    "message": "Skins",
+    "description": "Search result section heading. Matches the site's nav wording."
+  },
+  "section_items": {
+    "message": "Items",
+    "description": "Search result section heading. Matches the site's nav wording."
+  },
+  "section_collections": {
+    "message": "Collections",
+    "description": "Search result section heading. Matches the site's nav wording."
+  },
+  "section_weapons": {
+    "message": "Weapons",
+    "description": "Search result section heading."
+  },
+  "section_families": {
+    "message": "Skin Families",
+    "description": "Search result section heading: a skin across all its wear conditions."
+  },
+  "section_phases": {
+    "message": "Phases",
+    "description": "Search result section heading: Doppler-style phase variants."
+  },
+  "section_updates": {
+    "message": "Updates",
+    "description": "Search result section heading: CS2 game updates covered on the site."
+  },
+  "section_blog": {
+    "message": "Blog",
+    "description": "Search result section heading."
+  },
+  "panel_cheapest_condition": {
+    "message": "Cheapest condition",
+    "description": "Label above the price rows when the panel aggregates a whole skin family and shows its cheapest wear condition (exterior)."
+  },
+  "panel_not_in_catalog": {
+    "message": "Not in the SkinSniper catalog yet",
+    "description": "Shown when the item on the Steam page is unknown to the catalog."
+  },
+  "panel_search_on_skinsniper": {
+    "message": "Search on SkinSniper",
+    "description": "Button under the unknown-item note; opens the site search for the item's name."
+  },
+  "panel_no_site_access": {
+    "message": "SkinSniper has no access to its own site",
+    "description": "Shown in the panel when the browser has the extension's site access switched off, so API calls are blocked."
+  },
+  "panel_api_error": {
+    "message": "Could not reach SkinSniper",
+    "description": "Shown when the price request failed (offline, server error)."
+  },
+  "panel_try_again": {
+    "message": "Try again",
+    "description": "Retry button under the error note."
+  },
+  "panel_cheaper_than_steam": {
+    "message": "$PCT$% cheaper than Steam",
+    "description": "Tooltip on the discount badge next to a marketplace price. $PCT$ is a whole number.",
+    "placeholders": {
+      "pct": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  },
+  "panel_no_prices": {
+    "message": "No marketplace prices yet",
+    "description": "Shown when the item is known but no marketplace currently lists it."
+  },
+  "panel_more_markets_one": {
+    "message": "1 more market",
+    "description": "Button revealing one hidden marketplace price row."
+  },
+  "panel_more_markets": {
+    "message": "$COUNT$ more markets",
+    "description": "Button revealing hidden marketplace price rows. $COUNT$ is always 2 or more. Phrase it so it is grammatical for ANY count from 2 up in your language; if plural forms differ by number (e.g. Polish), use a numeral-neutral phrasing such as 'show $COUNT$ more'.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "panel_mini_title": {
+    "message": "SkinSniper prices",
+    "description": "Tooltip on the collapsed panel's small logo button."
+  },
+  "panel_collapse": {
+    "message": "Collapse",
+    "description": "Tooltip on the panel close button; collapses the panel to a small logo."
+  },
+  "panel_settings_title": {
+    "message": "SkinSniper settings",
+    "description": "Tooltip on the panel gear button; opens the popup on the settings card."
+  },
+  "panel_check_skin": {
+    "message": "Check skin details",
+    "description": "Bottom CTA linking the skin's page on skinsniper.com."
+  },
+  "panel_check_item": {
+    "message": "Check item details",
+    "description": "Bottom CTA linking the item's page on skinsniper.com."
+  }
+}

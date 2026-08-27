@@ -1,0 +1,6 @@
+dist/
+dist-firefox/
+release/
+node_modules/
+store/
+bun.lock

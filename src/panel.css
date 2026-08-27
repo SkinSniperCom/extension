@@ -1,0 +1,325 @@
+/* skinsniper.com palette: green #3FA367, bgs #202228/#27292F/#2E3138,
+   borders #383C46/#40444E, text #F5F6F7 (+B8/70 muted/faint). */
+
+.ssx-panel {
+  position: relative;
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: #202228;
+  border: 1px solid #40444E;
+  border-radius: 4px;
+  font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #F5F6F7B8;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* Both floating elements are draggable; interactive children keep their own
+   cursors (UA styles), so grab only shows on the panel's inert surface. */
+.ssx-panel.ssx-float {
+  cursor: grab;
+}
+
+.ssx-panel.ssx-float.ssx-dragging,
+.ssx-mini.ssx-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.ssx-rows,
+.ssx-cond {
+  transition: opacity 0.15s;
+}
+
+.ssx-panel.ssx-loading .ssx-rows,
+.ssx-panel.ssx-loading .ssx-cond {
+  opacity: 0.45;
+}
+
+.ssx-panel.ssx-loading::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3FA367;
+  animation: ssx-pulse 0.7s ease-in-out infinite alternate;
+}
+
+/* The floating variant keeps [gear][close] in that corner: while loading the
+   gear yields its spot to the pulsing dot, so the first text line only ever
+   needs to clear the fixed two-button cluster. */
+.ssx-panel.ssx-float.ssx-loading::after {
+  top: 15px;
+  right: 41px;
+}
+
+.ssx-panel.ssx-float.ssx-loading .ssx-gear {
+  visibility: hidden;
+}
+
+.ssx-panel.ssx-float .ssx-cond,
+.ssx-panel.ssx-float .ssx-item-name,
+.ssx-panel.ssx-float > .ssx-empty {
+  padding-right: 60px;
+}
+
+@keyframes ssx-pulse {
+  from {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ssx-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid #3FA367;
+  border-radius: 3px;
+  color: #3FA367;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ssx-cta svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.ssx-cta:hover {
+  background: #3FA367;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.ssx-cond {
+  margin-bottom: 4px;
+  color: #F5F6F770;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.ssx-item-name {
+  margin-bottom: 6px;
+  color: #F5F6F7;
+  font-weight: 600;
+}
+
+.ssx-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ssx-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  color: #F5F6F7B8;
+  text-decoration: none;
+}
+
+.ssx-row:hover {
+  background: #2E3138;
+  color: #F5F6F7;
+}
+
+.ssx-row i {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.ssx-row .ssx-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ssx-row b {
+  font-weight: 700;
+  color: #F5F6F7;
+}
+
+.ssx-empty {
+  padding: 4px 6px;
+  color: #F5F6F770;
+}
+
+.ssx-row.ssx-hidden {
+  display: none;
+}
+
+.ssx-more {
+  align-self: flex-start;
+  padding: 4px 6px;
+  background: none;
+  border: none;
+  color: #3FA367;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.ssx-more:hover {
+  color: #5CC084;
+  text-decoration: underline;
+}
+
+.ssx-badge {
+  flex: none;
+  padding: 1px 5px;
+  background: rgba(63, 163, 103, 0.12);
+  border-radius: 3px;
+  color: #3FA367;
+  font-size: 11px;
+  line-height: 1.4;
+  cursor: help;
+}
+
+.ssx-nav {
+  margin-right: 8px;
+}
+
+.ssx-panel.ssx-float {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  /* Kill the in-flow margin: top/bottom offsets position the margin edge,
+     so a leftover margin would shift every placement by 10px. */
+  margin: 0;
+  width: 260px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.ssx-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  color: #F5F6F770;
+  font-size: 20px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.ssx-close:hover {
+  background: #2E3138;
+  color: #F5F6F7;
+}
+
+.ssx-gear {
+  position: absolute;
+  top: 6px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  color: #F5F6F770;
+  cursor: pointer;
+}
+
+.ssx-gear svg {
+  width: 13px;
+  height: 13px;
+}
+
+.ssx-gear:hover {
+  background: #2E3138;
+  color: #F5F6F7;
+}
+
+.ssx-panel[hidden] {
+  display: none;
+}
+
+.ssx-mini {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  width: 44px;
+  height: 44px;
+  padding: 7px;
+  background: #202228;
+  border: 1px solid #40444E;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.ssx-mini:hover {
+  border-color: #3FA367;
+}
+
+.ssx-mini img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ssx-mini[hidden] {
+  display: none;
+}
+
+/* Corner variants (popup setting): both the panel and the mini default to
+   bottom-right; the other corners must reset the opposing anchors to auto. */
+.ssx-panel.ssx-float.ssx-pos-bl,
+.ssx-mini.ssx-pos-bl {
+  right: auto;
+  left: 16px;
+}
+
+.ssx-panel.ssx-float.ssx-pos-tr,
+.ssx-mini.ssx-pos-tr {
+  top: 16px;
+  bottom: auto;
+}
+
+.ssx-panel.ssx-float.ssx-pos-tl,
+.ssx-mini.ssx-pos-tl {
+  top: 16px;
+  right: auto;
+  bottom: auto;
+  left: 16px;
+}
+
+.inventory_page_right .ssx-panel {
+  width: 370px;
+  box-sizing: border-box;
+  margin: 0 0 10px;
+}

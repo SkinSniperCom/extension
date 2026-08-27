@@ -1,0 +1,161 @@
+{
+  "ext_name": {
+    "message": "SkinSniper - Precios de skins de CS2 en Steam"
+  },
+  "ext_description": {
+    "message": "Skins de CS2 en Steam Market e inventarios: precios de otros mercados en un panel pequeño. Sin peticiones a Steam, sin relleno."
+  },
+  "popup_settings": {
+    "message": "Ajustes"
+  },
+  "popup_back_to_search": {
+    "message": "Volver a la búsqueda"
+  },
+  "popup_search_placeholder": {
+    "message": "Busca skins y artículos..."
+  },
+  "popup_panel_position": {
+    "message": "Posición del panel en Steam"
+  },
+  "popup_pos_tl": {
+    "message": "Arriba a la izquierda"
+  },
+  "popup_pos_tr": {
+    "message": "Arriba a la derecha"
+  },
+  "popup_pos_bl": {
+    "message": "Abajo a la izquierda"
+  },
+  "popup_pos_br": {
+    "message": "Abajo a la derecha"
+  },
+  "popup_lang_currency": {
+    "message": "Idioma y moneda"
+  },
+  "popup_change": {
+    "message": "Cambiar"
+  },
+  "popup_prefs_hint": {
+    "message": "Los dos siguen lo que elegiste en skinsniper.com."
+  },
+  "popup_link_inventory_value": {
+    "message": "Valor de inventario"
+  },
+  "popup_link_trade_up": {
+    "message": "Trade-up"
+  },
+  "popup_link_price_comparison": {
+    "message": "Comparación de precios"
+  },
+  "popup_no_access": {
+    "message": "SkinSniper no puede leer las páginas de Steam ni entrar en su propio sitio, así que no se cargan precios."
+  },
+  "access_turn_on": {
+    "message": "Activar el acceso"
+  },
+  "popup_access_granted": {
+    "message": "El acceso está activado. Recarga la página de Steam para ver el panel."
+  },
+  "popup_access_still_off": {
+    "message": "El acceso sigue desactivado."
+  },
+  "popup_access_no_prompt": {
+    "message": "Aquí no se puede pedir el acceso."
+  },
+  "popup_manual_hint": {
+    "message": "Abre el menú de extensiones de la barra de herramientas, elige SkinSniper y permite ahí los sitios."
+  },
+  "popup_on_this_page": {
+    "message": "En esta página"
+  },
+  "popup_more_results": {
+    "message": "Más resultados ($COUNT$) →",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "128"
+      }
+    }
+  },
+  "section_skins": {
+    "message": "Skins"
+  },
+  "section_items": {
+    "message": "Artículos"
+  },
+  "section_collections": {
+    "message": "Colecciones"
+  },
+  "section_weapons": {
+    "message": "Armas"
+  },
+  "section_families": {
+    "message": "Familias de skins"
+  },
+  "section_phases": {
+    "message": "Fases"
+  },
+  "section_updates": {
+    "message": "Actualizaciones"
+  },
+  "section_blog": {
+    "message": "Blog"
+  },
+  "panel_cheapest_condition": {
+    "message": "Desgaste más barato"
+  },
+  "panel_not_in_catalog": {
+    "message": "Aún no está en el catálogo de SkinSniper"
+  },
+  "panel_search_on_skinsniper": {
+    "message": "Buscar en SkinSniper"
+  },
+  "panel_no_site_access": {
+    "message": "SkinSniper no tiene acceso a su propio sitio"
+  },
+  "panel_api_error": {
+    "message": "No se pudo conectar con SkinSniper"
+  },
+  "panel_try_again": {
+    "message": "Reintentar"
+  },
+  "panel_cheaper_than_steam": {
+    "message": "$PCT$% más barato que en Steam",
+    "placeholders": {
+      "pct": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  },
+  "panel_no_prices": {
+    "message": "Aún no hay precios en otros mercados"
+  },
+  "panel_more_markets_one": {
+    "message": "1 mercado más"
+  },
+  "panel_more_markets": {
+    "message": "$COUNT$ mercados más",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "panel_mini_title": {
+    "message": "Precios de SkinSniper"
+  },
+  "panel_collapse": {
+    "message": "Contraer"
+  },
+  "panel_settings_title": {
+    "message": "Ajustes de SkinSniper"
+  },
+  "panel_check_skin": {
+    "message": "Ver detalles de la skin"
+  },
+  "panel_check_item": {
+    "message": "Ver detalles del artículo"
+  }
+}
