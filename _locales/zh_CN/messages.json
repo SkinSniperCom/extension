@@ -38,6 +38,24 @@
   "popup_prefs_hint": {
     "message": "两项都跟随你在 skinsniper.com 上的选择。"
   },
+  "popup_markets": {
+    "message": "市场"
+  },
+  "popup_markets_hint": {
+    "message": "加星的市场排在价格面板最上方，隐藏的市场则完全不显示。"
+  },
+  "popup_market_pin": {
+    "message": "置顶"
+  },
+  "popup_market_unpin": {
+    "message": "取消置顶"
+  },
+  "popup_market_hide": {
+    "message": "隐藏该市场"
+  },
+  "popup_market_show": {
+    "message": "显示该市场"
+  },
   "popup_link_inventory_value": {
     "message": "库存价值"
   },
@@ -130,6 +148,15 @@
   },
   "panel_no_prices": {
     "message": "暂无市场价格"
+  },
+  "panel_pin_market": {
+    "message": "把该市场置顶"
+  },
+  "panel_unpin_market": {
+    "message": "取消该市场置顶"
+  },
+  "panel_markets_all_hidden": {
+    "message": "所有市场都在设置里被隐藏了"
   },
   "panel_more_markets_one": {
     "message": "还有 1 个市场"

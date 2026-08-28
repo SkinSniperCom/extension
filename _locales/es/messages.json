@@ -38,6 +38,24 @@
   "popup_prefs_hint": {
     "message": "Los dos siguen lo que elegiste en skinsniper.com."
   },
+  "popup_markets": {
+    "message": "Mercados"
+  },
+  "popup_markets_hint": {
+    "message": "Los mercados con estrella van arriba en el panel de precios. Los ocultos no aparecen."
+  },
+  "popup_market_pin": {
+    "message": "Fijar arriba"
+  },
+  "popup_market_unpin": {
+    "message": "Quitar de arriba"
+  },
+  "popup_market_hide": {
+    "message": "Ocultar este mercado"
+  },
+  "popup_market_show": {
+    "message": "Mostrar este mercado"
+  },
   "popup_link_inventory_value": {
     "message": "Valor de inventario"
   },
@@ -130,6 +148,15 @@
   },
   "panel_no_prices": {
     "message": "Aún no hay precios en otros mercados"
+  },
+  "panel_pin_market": {
+    "message": "Fijar este mercado arriba"
+  },
+  "panel_unpin_market": {
+    "message": "Quitar este mercado de arriba"
+  },
+  "panel_markets_all_hidden": {
+    "message": "Todos los mercados están ocultos en los ajustes"
   },
   "panel_more_markets_one": {
     "message": "1 mercado más"

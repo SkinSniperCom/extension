@@ -1,4 +1,5 @@
 import { requestLookup, requestPrefs, runtime, type PageMessage } from './lib/messages';
+import { marketPrefsReady } from './lib/markets';
 import { watchDom } from './lib/observe';
 import { buildPanel, markPanelsLoading, mountFloating, removeMini, removePanels } from './lib/panel';
 import { hashNameFromListingPath } from './lib/steam-page';
@@ -58,7 +59,7 @@ async function onSelection(listing_path: string | null): Promise<void> {
   }
   current_item_name = name;
 
-  const [data, prefs] = await Promise.all([requestLookup(name), sitePrefs()]);
+  const [data, prefs] = await Promise.all([requestLookup(name), sitePrefs(), marketPrefsReady()]);
   if (token !== selection_token) return;
   removePanels();
   const panel = buildPanel(data, 'inventory', prefs, name, () => {

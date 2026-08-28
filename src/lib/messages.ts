@@ -6,8 +6,21 @@ export type LookupOpts = { family?: boolean, exterior?: string, quality?: string
 export type ExtMessage
   = | ({ type: 'lookup', name: string } & LookupOpts)
     | { type: 'search', q: string }
+    | { type: 'markets' }
     | { type: 'prefs' }
     | { type: 'open_popup', view?: 'settings' };
+
+// The marketplace roster behind the popup's per-market settings (backend
+// /market/many). Only the fields the extension renders are typed here: the
+// route also serves link templates and ordering the site needs and this does
+// not. Deliberately not vendored from common/market.ts - that module carries
+// value code, and src/shared/ stays type-only.
+export type MarketMeta = {
+  id: number,
+  name: string,
+  title: string,
+  color: string,
+};
 
 // Popup -> content script (tabs.sendMessage): "what item is this page showing?"
 export type PageMessage = { type: 'current_item' };
@@ -50,6 +63,10 @@ export function requestLookup(name: string, opts?: LookupOpts): Promise<Extensio
 
 export function requestSearch(q: string): Promise<SearchSection[] | null> {
   return runtime.runtime.sendMessage<ExtMessage, SearchSection[] | null>({ type: 'search', q });
+}
+
+export function requestMarkets(): Promise<MarketMeta[] | null> {
+  return runtime.runtime.sendMessage<ExtMessage, MarketMeta[] | null>({ type: 'markets' });
 }
 
 export function requestPrefs(): Promise<PricePrefs | null> {

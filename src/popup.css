@@ -211,20 +211,24 @@ header a:hover {
   scrollbar-color: #40444E transparent;
 }
 
-#results::-webkit-scrollbar {
+#results::-webkit-scrollbar,
+#settings-view::-webkit-scrollbar {
   width: 8px;
 }
 
-#results::-webkit-scrollbar-track {
+#results::-webkit-scrollbar-track,
+#settings-view::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#results::-webkit-scrollbar-thumb {
+#results::-webkit-scrollbar-thumb,
+#settings-view::-webkit-scrollbar-thumb {
   background: #40444E;
   border-radius: 4px;
 }
 
-#results::-webkit-scrollbar-thumb:hover {
+#results::-webkit-scrollbar-thumb:hover,
+#settings-view::-webkit-scrollbar-thumb:hover {
   background: #4C515C;
 }
 
@@ -291,12 +295,18 @@ header a:hover {
   min-height: 0;
 }
 
+/* The market list makes this card the tallest view, so it scrolls on its own
+   rather than pushing the footer out of a 560px popup. */
 #settings-view {
-  flex: none;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 0;
   padding: 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #40444E transparent;
 }
 
 #search-view[hidden],
@@ -334,6 +344,87 @@ header a:hover {
 #settings-view .hint {
   color: #F5F6F770;
   font-size: 11px;
+}
+
+#settings-view .set-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 10px;
+  border-top: 1px solid #383C46;
+}
+
+/* One row per marketplace: colour dot, name, star (pin to the top of the Steam
+   panel) and eye (hide it everywhere). */
+#markets {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+}
+
+.mk-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 4px;
+  border-radius: 3px;
+}
+
+.mk-row:hover {
+  background: #27292F;
+}
+
+.mk-row i {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mk-row span {
+  flex: 1;
+  overflow: hidden;
+  color: #F5F6F7;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mk-row.off i {
+  opacity: 0.3;
+}
+
+.mk-row.off span {
+  color: #F5F6F770;
+  text-decoration: line-through;
+}
+
+.mk-btn {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  color: #F5F6F740;
+  cursor: pointer;
+}
+
+.mk-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.mk-btn:hover {
+  background: #2E3138;
+  color: #F5F6F7B8;
+}
+
+.mk-btn.on {
+  color: #F5F6F7B8;
 }
 
 /* 2x2 corner picker: each button is a tiny screen with a dot in its corner. */

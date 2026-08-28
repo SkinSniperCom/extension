@@ -38,6 +38,24 @@
   "popup_prefs_hint": {
     "message": "Jedno i drugie pochodzi z Twoich ustawień na skinsniper.com."
   },
+  "popup_markets": {
+    "message": "Rynki"
+  },
+  "popup_markets_hint": {
+    "message": "Rynki z gwiazdką są na górze panelu z cenami. Ukryte nie pojawiają się wcale."
+  },
+  "popup_market_pin": {
+    "message": "Przypnij na górę"
+  },
+  "popup_market_unpin": {
+    "message": "Odepnij"
+  },
+  "popup_market_hide": {
+    "message": "Ukryj ten rynek"
+  },
+  "popup_market_show": {
+    "message": "Pokaż ten rynek"
+  },
   "popup_link_inventory_value": {
     "message": "Wartość ekwipunku"
   },
@@ -130,6 +148,15 @@
   },
   "panel_no_prices": {
     "message": "Na razie brak cen z rynków"
+  },
+  "panel_pin_market": {
+    "message": "Przypnij ten rynek na górę"
+  },
+  "panel_unpin_market": {
+    "message": "Odepnij ten rynek"
+  },
+  "panel_markets_all_hidden": {
+    "message": "Wszystkie rynki są ukryte w ustawieniach"
   },
   "panel_more_markets_one": {
     "message": "Jeszcze 1 rynek"

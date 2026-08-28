@@ -1,5 +1,5 @@
 import { API_URL, SITE_URL, SITE_LOCALES, type PricePrefs } from './lib/config';
-import { isApiError, type ApiError, type ExtMessage } from './lib/messages';
+import { isApiError, type ApiError, type ExtMessage, type MarketMeta } from './lib/messages';
 import { hasAccess } from './lib/permissions';
 
 // Firefox event pages promise on `browser`; Chrome MV3 promises on `chrome`.
@@ -95,6 +95,15 @@ rt.runtime.onMessage.addListener((msg: ExtMessage, _sender, sendResponse) => {
       const data = await apiGet(`/search?${msg.q ? `q=${encodeURIComponent(msg.q)}&` : ''}limit=10${lang ? `&lang_skin=${lang}` : ''}`);
       // The popup renders sections or an empty state; it has no error UI.
       sendResponse(isApiError(data) ? null : data);
+    })();
+    return true;
+  }
+  if (msg.type === 'markets') {
+    void (async () => {
+      const data = await apiGet('/market/many') as { markets?: MarketMeta[] } | ApiError | null;
+      // The settings list has its own "could not load" state, so an error just
+      // comes back as null here.
+      sendResponse(isApiError(data) ? null : data?.markets ?? null);
     })();
     return true;
   }

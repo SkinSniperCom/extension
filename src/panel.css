@@ -143,11 +143,47 @@
   color: #F5F6F7;
 }
 
-.ssx-row i {
+/* The market's colour dot is the favourite toggle: inert-looking until you
+   reach for it, when it swaps to a faint star, then a lit one once starred.
+   Its inline color is the market colour, which both marks inherit. */
+.ssx-fav {
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ssx-fav i {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+}
+
+.ssx-fav svg {
+  display: none;
+  width: 13px;
+  height: 13px;
+  opacity: 0.5;
+}
+
+.ssx-fav:hover i,
+.ssx-fav.ssx-on i {
+  display: none;
+}
+
+.ssx-fav:hover svg,
+.ssx-fav.ssx-on svg {
+  display: block;
+}
+
+.ssx-fav.ssx-on svg {
+  opacity: 1;
 }
 
 .ssx-row .ssx-name {

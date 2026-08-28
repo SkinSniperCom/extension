@@ -51,6 +51,30 @@
     "message": "Both follow what you picked on skinsniper.com.",
     "description": "Hint under the settings rows: the panel's language and currency come from the user's choice on the website."
   },
+  "popup_markets": {
+    "message": "Marketplaces",
+    "description": "Settings section heading above the list of marketplaces."
+  },
+  "popup_markets_hint": {
+    "message": "Starred markets sit on top of the price panel. Hidden ones never show up.",
+    "description": "Hint under the marketplace heading, explaining what the star and the eye do."
+  },
+  "popup_market_pin": {
+    "message": "Pin to the top",
+    "description": "Star button tooltip in the settings list: pins the market to the top of the price panel."
+  },
+  "popup_market_unpin": {
+    "message": "Unpin",
+    "description": "Star button tooltip when the market is already pinned."
+  },
+  "popup_market_hide": {
+    "message": "Hide this market",
+    "description": "Eye button tooltip in the settings list: the market stops showing up in the panel."
+  },
+  "popup_market_show": {
+    "message": "Show this market",
+    "description": "Eye button tooltip when the market is currently hidden."
+  },
   "popup_link_inventory_value": {
     "message": "Inventory value",
     "description": "Popup footer link to the inventory value calculator tool."
@@ -170,6 +194,18 @@
   "panel_no_prices": {
     "message": "No marketplace prices yet",
     "description": "Shown when the item is known but no marketplace currently lists it."
+  },
+  "panel_pin_market": {
+    "message": "Pin this market to the top",
+    "description": "Tooltip on the market's colour dot in the price panel; clicking it pins the market to the top."
+  },
+  "panel_unpin_market": {
+    "message": "Unpin this market",
+    "description": "Tooltip on the dot when the market is already pinned to the top."
+  },
+  "panel_markets_all_hidden": {
+    "message": "Every market is hidden in the settings",
+    "description": "Shown instead of the price rows when the user hid every marketplace in the extension settings."
   },
   "panel_more_markets_one": {
     "message": "1 more market",

@@ -1,6 +1,7 @@
 import type { ExtensionLookup } from '../shared/extension';
 import { formatPrice, siteLink, siteRawLink, type PricePrefs } from './config';
 import { t } from './i18n';
+import { isFavMarket, onMarketPrefsChange, orderMarkets, toggleFavMarket } from './markets';
 import { isApiError, requestOpenPopup, runtime, type ApiError } from './messages';
 import { clampPanelXY, panelPos, placeNode, savePanelXY } from './position';
 
@@ -73,6 +74,26 @@ export function gearGlyph(): SVGSVGElement {
   return svg;
 }
 
+// Procedural 5-point star for the favourite toggle: the market's colour dot
+// turns into it on hover and stays as it once the market is starred. The popup
+// reuses it so both surfaces show the same mark.
+export function starGlyph(): SVGSVGElement {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '-10 -10 20 20');
+  svg.setAttribute('aria-hidden', 'true');
+  const pts: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const radius = i % 2 ? 4 : 9.5;
+    const angle = -Math.PI / 2 + i * Math.PI / 5;
+    pts.push(`${(Math.cos(angle) * radius).toFixed(2)} ${(Math.sin(angle) * radius).toFixed(2)}`);
+  }
+  const path = document.createElementNS(SVG_NS, 'path');
+  path.setAttribute('d', `M${pts.join('L')}Z`);
+  path.setAttribute('fill', 'currentColor');
+  svg.appendChild(path);
+  return svg;
+}
+
 function ctaLink(text: string, href: string): HTMLAnchorElement {
   const cta = el('a', 'ssx-cta');
   cta.href = href;
@@ -120,6 +141,51 @@ export function buildErrorPanel(retry?: () => void, no_access?: boolean): HTMLEl
   return panel;
 }
 
+// The market's colour dot doubles as the favourite toggle: hovering morphs it
+// into a faint star, clicking pins the market to the top of the panel and keeps
+// the star lit. It sits inside the row's anchor, so the click has to be
+// swallowed or the browser would follow the market link instead (this also
+// covers keyboard activation, whose click bubbles the same way).
+function favToggle(name: string, color: string): HTMLButtonElement {
+  const on = isFavMarket(name);
+  const btn = el('button', on ? 'ssx-fav ssx-on' : 'ssx-fav');
+  btn.type = 'button';
+  btn.style.color = color;
+  btn.title = t(on ? 'panel_unpin_market' : 'panel_pin_market');
+  btn.setAttribute('aria-label', btn.title);
+  btn.setAttribute('aria-pressed', String(on));
+  const dot = el('i');
+  dot.style.background = color;
+  btn.append(dot, starGlyph());
+  btn.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleFavMarket(name);
+  });
+  return btn;
+}
+
+// Panels currently on the page, so starring or hiding a market anywhere (this
+// panel, another tab, the popup) reorders them all without a fresh lookup.
+// Entries for panels that have since been removed are dropped on the next pass.
+const panel_renderers = new Map<HTMLElement, () => void>();
+let watching_prefs = false;
+
+function trackPanel(panel: HTMLElement, render: () => void): void {
+  for (const node of panel_renderers.keys()) {
+    if (!node.isConnected) panel_renderers.delete(node);
+  }
+  panel_renderers.set(panel, render);
+  if (watching_prefs) return;
+  watching_prefs = true;
+  onMarketPrefsChange(() => {
+    for (const [node, node_render] of panel_renderers) {
+      if (node.isConnected) node_render();
+      else panel_renderers.delete(node);
+    }
+  });
+}
+
 export function buildPanel(data: ExtensionLookup | ApiError | null, medium: string, prefs?: PricePrefs | null, fallback_name?: string, retry?: () => void): HTMLElement | null {
   if (data && isApiError(data)) return buildErrorPanel(retry, data.no_access);
   if (!data || data.kind === null) {
@@ -140,40 +206,53 @@ export function buildPanel(data: ExtensionLookup | ApiError | null, medium: stri
     if (cond_label) panel.appendChild(el('div', 'ssx-cond', cond_label));
   }
 
-  const steam = data.markets.find((r) => r.name === 'steam');
+  // Bound outside the renderer: it reruns whenever the market preferences
+  // change, and a nested function would lose the narrowing on `data`.
+  const markets = data.markets;
+  // The discount badge always measures against Steam's own price, even when
+  // Steam itself is one of the markets the user hid.
+  const steam = markets.find((r) => r.name === 'steam');
   const rows = el('div', 'ssx-rows');
-  for (const [index, row] of data.markets.entries()) {
-    const a = el('a', index < MAX_ROWS ? 'ssx-row' : 'ssx-row ssx-hidden');
-    a.href = siteRawLink(row.ref);
-    a.target = '_blank';
-    a.rel = 'noopener nofollow';
-    const dot = el('i');
-    dot.style.background = row.color;
-    a.append(dot, el('span', 'ssx-name', row.title));
-    if (steam && row.name !== 'steam' && row.price < steam.price) {
-      const pct = Math.round((1 - row.price / steam.price) * 100);
-      if (pct >= 1) {
-        const badge = el('span', 'ssx-badge', `-${pct}%`);
-        badge.title = t('panel_cheaper_than_steam', String(pct));
-        a.appendChild(badge);
-      }
+  let expanded = false;
+
+  function renderRows(): void {
+    rows.replaceChildren();
+    const visible = orderMarkets(markets);
+    if (!visible.length) {
+      rows.appendChild(el('div', 'ssx-empty', t(markets.length ? 'panel_markets_all_hidden' : 'panel_no_prices')));
+      return;
     }
-    a.appendChild(el('b', undefined, formatPrice(row.price, prefs)));
-    rows.appendChild(a);
-  }
-  if (!data.markets.length) rows.appendChild(el('div', 'ssx-empty', t('panel_no_prices')));
-  const hidden_count = data.markets.length - MAX_ROWS;
-  if (hidden_count > 0) {
-    const toggle = el('button', 'ssx-more', hidden_count === 1 ? t('panel_more_markets_one') : t('panel_more_markets', String(hidden_count)));
-    toggle.type = 'button';
-    toggle.addEventListener('click', () => {
-      rows.querySelectorAll('.ssx-hidden').forEach((node) => {
-        node.classList.remove('ssx-hidden');
+    for (const [index, row] of visible.entries()) {
+      const a = el('a', !expanded && index >= MAX_ROWS ? 'ssx-row ssx-hidden' : 'ssx-row');
+      a.href = siteRawLink(row.ref);
+      a.target = '_blank';
+      a.rel = 'noopener nofollow';
+      a.append(favToggle(row.name, row.color), el('span', 'ssx-name', row.title));
+      if (steam && row.name !== 'steam' && row.price < steam.price) {
+        const pct = Math.round((1 - row.price / steam.price) * 100);
+        if (pct >= 1) {
+          const badge = el('span', 'ssx-badge', `-${pct}%`);
+          badge.title = t('panel_cheaper_than_steam', String(pct));
+          a.appendChild(badge);
+        }
+      }
+      a.appendChild(el('b', undefined, formatPrice(row.price, prefs)));
+      rows.appendChild(a);
+    }
+    const rest = visible.length - MAX_ROWS;
+    if (!expanded && rest > 0) {
+      const toggle = el('button', 'ssx-more', rest === 1 ? t('panel_more_markets_one') : t('panel_more_markets', String(rest)));
+      toggle.type = 'button';
+      toggle.addEventListener('click', () => {
+        expanded = true;
+        renderRows();
       });
-      toggle.remove();
-    });
-    rows.appendChild(toggle);
+      rows.appendChild(toggle);
+    }
   }
+
+  renderRows();
+  trackPanel(panel, renderRows);
   panel.appendChild(rows);
 
   if (data.href) {

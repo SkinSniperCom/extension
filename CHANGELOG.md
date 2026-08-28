@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Marketplace list in the popup settings: star a market to pin it to the top of
+  the price panel, or hide it so it never shows up.
+- The colour dot in front of each price row is the same toggle - it turns into
+  a star on hover, and stays lit once the market is pinned.
+
 ## 0.2.0
 
 - Localized UI: the popup and the Steam page panel follow the browser UI

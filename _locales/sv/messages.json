@@ -38,6 +38,24 @@
   "popup_prefs_hint": {
     "message": "Båda följer det du valt på skinsniper.com."
   },
+  "popup_markets": {
+    "message": "Marknader"
+  },
+  "popup_markets_hint": {
+    "message": "Stjärnmärkta marknader ligger överst i prispanelen. Dolda visas aldrig."
+  },
+  "popup_market_pin": {
+    "message": "Fäst överst"
+  },
+  "popup_market_unpin": {
+    "message": "Lossa"
+  },
+  "popup_market_hide": {
+    "message": "Dölj den här marknaden"
+  },
+  "popup_market_show": {
+    "message": "Visa den här marknaden"
+  },
   "popup_link_inventory_value": {
     "message": "Inventarievärde"
   },
@@ -130,6 +148,15 @@
   },
   "panel_no_prices": {
     "message": "Inga marknadspriser än"
+  },
+  "panel_pin_market": {
+    "message": "Fäst den här marknaden överst"
+  },
+  "panel_unpin_market": {
+    "message": "Lossa den här marknaden"
+  },
+  "panel_markets_all_hidden": {
+    "message": "Alla marknader är dolda i inställningarna"
   },
   "panel_more_markets_one": {
     "message": "1 marknad till"

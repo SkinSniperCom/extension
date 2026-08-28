@@ -1,7 +1,8 @@
 import { SITE_URL, STATIC_URL, siteLink, formatPrice, type PricePrefs } from './lib/config';
 import { t } from './lib/i18n';
-import { isApiError, requestLookup, requestPrefs, requestSearch, runtime, type CurrentItem, type PageMessage, type SearchResultRow, type SearchSection } from './lib/messages';
-import { conditionLabel, gearGlyph } from './lib/panel';
+import { isFavMarket, isHiddenMarket, marketPrefsReady, onMarketPrefsChange, orderMarkets, toggleFavMarket, toggleHiddenMarket } from './lib/markets';
+import { isApiError, requestLookup, requestMarkets, requestPrefs, requestSearch, runtime, type CurrentItem, type MarketMeta, type PageMessage, type SearchResultRow, type SearchSection } from './lib/messages';
+import { conditionLabel, gearGlyph, starGlyph } from './lib/panel';
 import { hasAccess, requiredOrigins } from './lib/permissions';
 
 // Static popup markup keeps English fallback text; localized strings replace
@@ -132,6 +133,93 @@ pos_grid?.addEventListener('click', (event) => {
   void runtime.storage.local.remove('panel_xy').catch(() => { /* corner class still applies */ });
 });
 
+// Marketplace list: one row per market the site prices, each with a star (pin
+// it to the top of the Steam panel) and an eye (never show it again). The roster
+// comes from the backend, so a new marketplace appears here without an extension
+// release. Colour dots rather than the site's icon files: the same mark the
+// panel uses, and nothing to load.
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function eyeGlyph(off: boolean): SVGSVGElement {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '-10 -10 20 20');
+  svg.setAttribute('aria-hidden', 'true');
+  const lid = document.createElementNS(SVG_NS, 'path');
+  lid.setAttribute('d', 'M-9 0C-5-5.5 5-5.5 9 0 5 5.5-5 5.5-9 0Z');
+  lid.setAttribute('fill', 'none');
+  lid.setAttribute('stroke', 'currentColor');
+  lid.setAttribute('stroke-width', '1.6');
+  const pupil = document.createElementNS(SVG_NS, 'circle');
+  pupil.setAttribute('r', '2.6');
+  pupil.setAttribute('fill', 'currentColor');
+  svg.append(lid, pupil);
+  if (off) {
+    const slash = document.createElementNS(SVG_NS, 'path');
+    slash.setAttribute('d', 'M-7.5-7.5 7.5 7.5');
+    slash.setAttribute('stroke', 'currentColor');
+    slash.setAttribute('stroke-width', '1.8');
+    slash.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(slash);
+  }
+  return svg;
+}
+
+const markets_el = document.getElementById('markets') as HTMLElement;
+let market_list: MarketMeta[] | null = null;
+
+function toggleButton(on: boolean, label: string, glyph: SVGSVGElement, onClick: () => void): HTMLButtonElement {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = on ? 'mk-btn on' : 'mk-btn';
+  btn.title = label;
+  btn.setAttribute('aria-label', label);
+  btn.setAttribute('aria-pressed', String(on));
+  btn.appendChild(glyph);
+  btn.addEventListener('click', onClick);
+  return btn;
+}
+
+function marketRow(market: MarketMeta): HTMLElement {
+  const fav = isFavMarket(market.name);
+  const off = isHiddenMarket(market.name);
+
+  const row = document.createElement('div');
+  row.className = off ? 'mk-row off' : 'mk-row';
+  const dot = document.createElement('i');
+  dot.style.background = market.color;
+  const name = document.createElement('span');
+  name.textContent = market.title;
+
+  const star = toggleButton(fav, t(fav ? 'popup_market_unpin' : 'popup_market_pin'), starGlyph(), () => {
+    toggleFavMarket(market.name);
+  });
+  // A starred market keeps its own colour, so the list reads like the panel.
+  if (fav) star.style.color = market.color;
+  const eye = toggleButton(off, t(off ? 'popup_market_show' : 'popup_market_hide'), eyeGlyph(off), () => {
+    toggleHiddenMarket(market.name);
+  });
+
+  row.append(dot, name, star, eye);
+  return row;
+}
+
+function renderMarkets(): void {
+  if (market_list) markets_el.replaceChildren(...market_list.map(marketRow));
+}
+
+void Promise.all([requestMarkets().catch(() => null), marketPrefsReady()]).then(([list]) => {
+  if (!list?.length) {
+    const note = document.createElement('p');
+    note.className = 'hint';
+    note.textContent = t('panel_api_error');
+    markets_el.replaceChildren(note);
+    return;
+  }
+  market_list = list;
+  renderMarkets();
+  onMarketPrefsChange(renderMarkets);
+});
+
 function rowHref(row: SearchResultRow): string | null {
   if (row.href) return row.href;
   if (row.type === 'paint') return `/skins/${row.sid}`;
@@ -183,7 +271,7 @@ async function showCurrentItem(): Promise<void> {
   }
   if (!current.name) return;
   const data = await requestLookup(current.name, current);
-  await prefs_ready;
+  await Promise.all([prefs_ready, marketPrefsReady()]);
   // An API error just leaves the row out - the popup has no error state.
   if (!data || isApiError(data) || data.kind === null || !data.href) return;
 
@@ -207,7 +295,9 @@ async function showCurrentItem(): Promise<void> {
   sub.textContent = `${t('popup_on_this_page')}${cond ? ` · ${cond}` : ''}`;
   text.append(name, sub);
   a.appendChild(text);
-  const best = data.markets[0];
+  // Same ordering the panel uses, so the price quoted here is the one the
+  // panel's top row shows.
+  const best = orderMarkets(data.markets)[0];
   if (best) {
     const price = document.createElement('b');
     price.textContent = formatPrice(best.price, prefs);

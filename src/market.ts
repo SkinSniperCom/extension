@@ -1,4 +1,5 @@
 import { requestLookup, requestPrefs, runtime, type LookupOpts, type PageMessage } from './lib/messages';
+import { marketPrefsReady } from './lib/markets';
 import { watchUrl } from './lib/observe';
 import { buildPanel, markPanelsLoading, mountFloating, removeMini, removePanels } from './lib/panel';
 import { hashNameFromScripts, hashNameFromListingPath } from './lib/steam-page';
@@ -38,7 +39,7 @@ async function showPanel(name: string): Promise<void> {
   if (key === shown_key) return;
   shown_key = key;
   markPanelsLoading();
-  const [data, prefs] = await Promise.all([requestLookup(name, opts), sitePrefs()]);
+  const [data, prefs] = await Promise.all([requestLookup(name, opts), sitePrefs(), marketPrefsReady()]);
   if (key !== shown_key) return;
   removePanels();
   const panel = buildPanel(data, 'market_listing', prefs, name, () => {
